@@ -10,7 +10,7 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                git 'https://github.com/your-username/qxresearch-event-1.git'
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-creds', url: 'https://github.com/BadamTeja/qxresearch-event-1.git']])
             }
         }
 
