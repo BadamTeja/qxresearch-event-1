@@ -1,4 +1,4 @@
-from PyPDF2 import PdfFileWriter, PdfFileReader
+from PyPDF2 import PdfWriter, PdfReader
 import getpass
 
 # Making an instance of the PdfFileWriter class and storing it in a variable
