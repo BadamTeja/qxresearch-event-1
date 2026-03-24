@@ -67,13 +67,15 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                sh """
-                kubectl set image deployment/sample-app sample-app=$DOCKER_IMAGE:$IMAGE_TAG || true
-                kubectl apply -f k8s/
-                """
-            }
-        }
+       stage('Deploy to Kubernetes') {
+    steps {
+        sh """
+        cp k8s/deployment.yaml k8s/deployment-temp.yaml
+        sed -i 's|REPLACE_IMAGE|$DOCKER_IMAGE:$IMAGE_TAG|g' k8s/deployment-temp.yaml
+        kubectl apply -f k8s/deployment-temp.yaml
+        kubectl apply -f k8s/service.yaml
+        """
+    }
+}
     }
 }
